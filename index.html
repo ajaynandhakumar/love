@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Story ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,#ffafbd,#ffc3a0);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+}
+
+/* INTRO */
+#intro{
+  position:fixed;
+  inset:0;
+  background:black;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  z-index:10;
+  animation:introFade 3.5s forwards;
+}
+@keyframes introFade{
+  0%,70%{opacity:1}
+  100%{opacity:0;pointer-events:none}
+}
+
+/* BOOK */
+#book{
+  width:360px;
+  height:560px;
+  perspective:1600px;
+}
+
+.page{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.9);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  transform-origin:left;
+  transform:rotateY(180deg);
+  backface-visibility:hidden;
+  transition:transform 1s ease;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.page.active{transform:rotateY(0)}
+
+h1,h2{
+  font-family:'Playfair Display',serif;
+  color:#b03060;
+  margin-bottom:14px;
+}
+p{
+  font-size:.95rem;
+  color:#444;
+  line-height:1.7;
+  animation:fadeUp 1.4s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.page img{
+  width:100%;
+  max-height:280px;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:14px;
+  animation:zoomSlow 6s ease forwards;
+}
+@keyframes zoomSlow{
+  from{transform:scale(1)}
+  to{transform:scale(1.1)}
+}
+
+/* SPARKLES */
+.sparkle{
+  position:absolute;
+  width:6px;height:6px;
+  background:white;
+  border-radius:50%;
+  opacity:.8;
+  animation:spark 3s linear infinite;
+}
+@keyframes spark{
+  from{transform:translateY(0)}
+  to{transform:translateY(-120px);opacity:0}
+}
+
+/* CONTROLS */
+#controls{
+  position:fixed;
+  bottom:20px;
+  display:flex;
+  gap:16px;
+}
+button{
+  border:none;
+  cursor:pointer;
+}
+button.nav{
+  padding:12px 22px;
+  border-radius:30px;
+  background:#b03060;
+  color:white;
+}
+#yesBtn{
+  margin-top:20px;
+  padding:14px 28px;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:1.1rem;
+  box-shadow:0 12px 30px rgba(255,77,109,.6);
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+
+/* FIREWORK */
+.firework{
+  position:fixed;
+  width:6px;height:6px;
+  background:transparent;
+  border-radius:50%;
+  box-shadow:
+    0 -30px #ff4d6d,
+    21px -21px #ffd166,
+    30px 0 #ff9f1c,
+    21px 21px #ff4d6d,
+    0 30px #ffd166,
+    -21px 21px #ff9f1c,
+    -30px 0 #ff4d6d,
+    -21px -21px #ffd166;
+  animation:boom 1.5s ease-out forwards;
+}
+@keyframes boom{
+  from{transform:scale(0);opacity:1}
+  to{transform:scale(1.4);opacity:0}
+}
+
+/* ENDING */
+#endingOverlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,77,109,.85),rgba(176,48,96,.9));
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  z-index:20;
+  text-align:center;
+}
+
+/* PHOTO RAIN ❤️ */
+.photoRain{
+  position:fixed;
+  top:-120px;
+  width:clamp(50px,18vw,90px);
+  border-radius:16px;
+  object-fit:cover;
+  clip-path:polygon(
+    50% 15%,61% 0,100% 18%,80% 60%,
+    50% 100%,20% 60%,0 18%,39% 0
+  );
+  animation:rain linear forwards;
+  z-index:9999;
+  pointer-events:none;
+}
+@keyframes rain{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  #book{width:92vw;height:85vh}
+  h1,h2{font-size:1.4rem}
+  p{font-size:.9rem}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">Our Love Story ❤️</div>
+
+<audio id="music"></audio>
+<audio id="voice"></audio>
+
+<div id="book">
+  <section class="page active">
+    <img src="pic/z.jpeg">
+    <h1>Ajay ❤️ My Queen</h1>
+    <p>7 Years of Pure Love</p>
+  </section>
+  <section class="page"><h2>Chapter 1</h2><p>From strangers to soulmates.<br>இந்தக் கடிதம் எழுதும் போது கூட என் மனசு கொஞ்சம் கனமாகவும், அதே நேரத்தில் சந்தோஷமாகவும் இருக்கு.
+ஏனென்றால் இது ஒரு நாள் காதல் இல்லை…
+7 வருடங்கள்—சிரிப்பும், கண்ணீரும், கோபமும், சமாதானமும் கலந்து வாழ்ந்த காதல்.</p></section>
+  <section class="page"><h2>Chapter 2</h2><p>You became my peace.<br>நாம் முதன்முதலாக பேசின அந்த நாளை இன்னும் மறக்க முடியவில்லை.
+அப்போது தெரியவில்லை…
+நீ என் வாழ்க்கையின் மிக முக்கியமான மனிதியாக மாறப் போகிறாய் என்று.
+ஆனா இன்று தெரியும்—
+என் வாழ்க்கை “நீ” இல்லாமல் முழுமையில்லை.</p></section>
+  <section class="page"><img src="pic/a.jpeg"><p>Memories forever.</p></section>
+  <section class="page"><img src="pic/b.jpeg"><p>Every smile ❤️</p></section>
+  <section class="page"><h2>Chapter 3</h2><p>Storms made us stronger.<br>இந்த 7 வருடங்களில் நாம்சிரித்த நாட்கள் இருக்கிறது,
+ஒருவரை ஒருவர் புரியாமல் வாதாடிய நாட்களும் இருக்கிறது,
+சில நேரம் பேசாமலே தவித்த நாட்களும் இருக்கிறது.
+ஆனா எதுவும் நம்மை பிரிக்கவில்லை…
+ஏனென்றால் நம்மை இணைத்தது உண்மையான காதல்.</p></section>
+  <section class="page"><h2>Promise</h2><p>I choose you always.<br>நீ சந்தோஷமாக இருக்கும்போது
+அந்த சந்தோஷம் என்னையும் நிரப்பியது.
+நீ சோகமாக இருந்த நாட்களில்
+உன்னை சரி செய்ய முடியாத என் மனசு
+உன்னோடே உடைந்து போனது.</p></section>
+  <section class="page"><h2>Our Future</h2><p>Forever us.<br>உன் சிரிப்பு—என் பலம்.
+உன் கண்ணீர்—என் பலவீனம்.
+உன் கோபம் கூட—
+நீ என்னை எவ்வளவு நம்புகிறாய் என்பதற்கான அடையாளம்.</p></section>
+  <section class="page"><img src="pic/c.jpeg"><p>My world.</p></section>
+  <section class="page">
+    <h2>Final Question</h2>
+    <p>Will you stay forever?</p>
+    <button id="yesBtn">YES ❤️</button>
+    <p id="yesMsg" style="display:none;color:#b03060;font-family:'Playfair Display',serif">She said YES 💍❤️</p>
+  </section>
+</div>
+
+<div id="controls">
+  <button class="nav" id="prev">⬅ Prev</button>
+  <button class="nav" id="next">Next ➡</button>
+</div>
+
+<script>
+const pages=document.querySelectorAll('.page');
+let current=0;
+
+function showPage(i){
+  pages.forEach(p=>p.classList.remove('active'));
+  pages[i].classList.add('active');
+  music.src=songs[i]||songs[0];
+  voice.src=voices[i]||voices[0];
+  music.play(); voice.play();
+}
+
+next.onclick=()=>{if(current<pages.length-1){current++;showPage(current)}}
+prev.onclick=()=>{if(current>0){current--;showPage(current)}}
+
+setInterval(()=>{
+  const s=document.createElement('div');
+  s.className='sparkle';
+  s.style.left=Math.random()*100+'%';
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),3000);
+},500);
+
+/* PHOTO RAIN */
+const photos=["pic/a.jpeg","pic/b.jpeg","pic/c.jpeg","pic/d.jpeg","pic/g.jpg","pic/z.jpeg"];
+let rainInterval;
+function startPhotoRain(){
+  rainInterval=setInterval(()=>{
+    const img=document.createElement('img');
+    img.src=photos[Math.floor(Math.random()*photos.length)];
+    img.className='photoRain';
+    img.style.left=Math.random()*100+'vw';
+    img.style.animationDuration=(4+Math.random()*3)+'s';
+    document.body.appendChild(img);
+    setTimeout(()=>img.remove(),7000);
+  },550);
+}
+
+/* YES BUTTON */
+const yesBtn=document.getElementById('yesBtn');
+const yesMsg=document.getElementById('yesMsg');
+const overlay=document.createElement('div');
+overlay.id='endingOverlay';
+overlay.innerHTML="<h1>Forever Us ❤️</h1><p>7 Years • Infinite Love</p>";
+document.body.appendChild(overlay);
+
+yesBtn.onclick=()=>{
+  for(let i=0;i<10;i++){
+    const fw=document.createElement('div');
+    fw.className='firework';
+    fw.style.left=Math.random()*100+'%';
+    fw.style.top=Math.random()*100+'%';
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1500);
+  }
+  yesMsg.style.display='block';
+  yesBtn.innerText='FOREVER ❤️';
+  startPhotoRain();
+  setTimeout(()=>overlay.style.display='flex',1200);
+};
+</script>
+
+</body>
+</html>
